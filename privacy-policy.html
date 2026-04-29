@@ -127,10 +127,10 @@
 <body>
     <div class="container">
         <h1>Privacy Policy</h1>
-        <p class="subtitle">Moneytrax &mdash; Personal Finance Tracker for Android<br>Effective date: April 7, 2026</p>
+        <p class="subtitle">Moneytrax &mdash; Personal Finance Tracker for Android<br>Effective date: April 29, 2026</p>
 
         <div class="card">
-            <strong>Summary:</strong> Moneytrax stores all your financial data locally on your device. We do not collect, transmit, or sell your personal information. The only network connections are for exchange-rate updates, Google ads (with your consent), in-app purchases, and optional cloud backup to your own Google Drive. Your data only leaves the device when you explicitly choose to back up or export it.
+            <strong>Summary:</strong> Moneytrax stores all your financial data locally on your device, including transaction records, optional receipt photos, and location coordinates. We do not collect, transmit, or sell your personal information. The only network connections are for exchange-rate updates, Google ads (with your consent), in-app purchases, and optional cloud backup to your own Google Drive. Photos and location data are stored on-device only and are included in your Drive backup if you choose to use it. Your data only leaves the device when you explicitly choose to back up or export it.
         </div>
 
         <h2>1. Information We Collect</h2>
@@ -143,9 +143,11 @@
             <li>Pending payments and bills</li>
             <li>Personal notes and reminders</li>
             <li>Custom expense/income categories</li>
+            <li>Receipt or transaction photos (taken with your camera or selected from your gallery)</li>
+            <li>Location coordinates attached to expense transactions (only when you explicitly tap &ldquo;Add Location&rdquo;)</li>
             <li>App preferences (base currency, passcode, biometric settings)</li>
         </ul>
-        <p><strong>All of this data is stored exclusively on your device</strong> in a local SQLite database. It is never transmitted to our servers because we do not operate any servers that receive user data.</p>
+        <p><strong>All of this data is stored exclusively on your device</strong> in a local SQLite database and app-private internal storage. It is never transmitted to our servers because we do not operate any servers that receive user data.</p>
 
         <h3>1.2 Data Collected Automatically</h3>
         <p>Moneytrax itself does not collect analytics, device identifiers, or usage telemetry. However, third-party services integrated in the app may collect limited data as described in Section 3.</p>
@@ -162,6 +164,12 @@
 
         <h3>2.1 CSV Export</h3>
         <p>Moneytrax allows you to export your transaction data as a CSV file using the Android share sheet. When you use this feature, your financial data leaves the app and is handled by the receiving app you choose (e.g. email, messaging, file manager). This only happens when you explicitly initiate an export.</p>
+
+        <h3>2.2 Photo Attachments</h3>
+        <p>You may optionally attach a photo (e.g. a receipt image) to any income or expense transaction. Photos are stored in the app's private internal storage on your device and are never transmitted anywhere. They are automatically included in your Google Drive backup if you choose to use that feature, and are permanently deleted when you remove the transaction or uninstall the app.</p>
+
+        <h3>2.3 Location Attachment</h3>
+        <p>When you tap &ldquo;Add Location&rdquo; on an expense transaction, Moneytrax requests your device's current GPS coordinates. These coordinates are stored locally in the transaction record only. They are never sent to our servers. A map preview of the pinned location is displayed using the Google Maps SDK (see Section 3). Location data is included in Google Drive backups if you choose to use that feature.</p>
 
         <h2>3. Third-Party Services</h2>
         <p>Moneytrax integrates the following third-party services, each governed by its own privacy policy:</p>
@@ -188,7 +196,12 @@
                 <tr>
                     <td><strong>Google Sign-In &amp; Google Drive</strong></td>
                     <td>Optional cloud backup/restore</td>
-                    <td>During sign-in, your Google email address is accessed to authenticate with Google Drive. It is not stored separately or transmitted to our servers. Your database backup is stored in your own Google Drive AppData folder (app-private, not visible in Drive). Backups are only initiated by you.</td>
+                    <td>During sign-in, your Google email address is accessed to authenticate with Google Drive. It is not stored separately or transmitted to our servers. Your backup (containing your transaction database and any attached photos) is stored as a single ZIP file in your own Google Drive AppData folder (app-private, not visible to other apps or Drive users). Backups are only initiated by you.</td>
+                </tr>
+                <tr>
+                    <td><strong>Google Maps SDK</strong></td>
+                    <td>Display map preview for attached location</td>
+                    <td>When a location is attached to a transaction, the Maps SDK renders a local map tile preview. Google may process the location coordinates and device identifiers to serve map tiles, per <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>. No location data is sent to our servers.</td>
                 </tr>
                 <tr>
                     <td><strong>Google Play In-App Review</strong></td>
@@ -233,6 +246,18 @@
                     <td>Reschedule reminders after device restart</td>
                 </tr>
                 <tr>
+                    <td>Camera (CAMERA)</td>
+                    <td>Take receipt or transaction photos to attach to income/expense entries. Used only when you explicitly open the camera inside the app.</td>
+                </tr>
+                <tr>
+                    <td>Media / Storage (READ_MEDIA_IMAGES &amp; READ_EXTERNAL_STORAGE)</td>
+                    <td>Select an existing photo from your gallery to attach to a transaction. No images are uploaded or shared beyond your device.</td>
+                </tr>
+                <tr>
+                    <td>Location (ACCESS_FINE_LOCATION &amp; ACCESS_COARSE_LOCATION)</td>
+                    <td>Attach your current GPS location to an expense transaction. Requested only when you explicitly tap &ldquo;Add Location.&rdquo; Location is stored locally and never sent to our servers.</td>
+                </tr>
+                <tr>
                     <td>Billing (com.android.vending.BILLING)</td>
                     <td>Process in-app purchases through Google Play</td>
                 </tr>
@@ -241,7 +266,7 @@
 
         <h2>5. Data Security</h2>
         <ul>
-            <li>Your passcode is stored in Android Keystore-backed secure storage.</li>
+            <li>Your passcode is stored as a <strong>salted PBKDF2-HMAC-SHA256 hash</strong> (120,000 iterations) in Android Keystore-backed secure storage.</li>
             <li>Biometric authentication uses the Android BiometricPrompt API with hardware-level security.</li>
             <li>Cloud backups are stored in the <strong>app-private folder</strong> of your Google Drive, inaccessible to other apps.</li>
             <li>All financial data remains on-device unless you explicitly initiate a cloud backup or CSV export.</li>
