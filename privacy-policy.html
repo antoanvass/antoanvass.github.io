@@ -127,7 +127,7 @@
 <body>
     <div class="container">
         <h1>Privacy Policy</h1>
-        <p class="subtitle">Moneytrax &mdash; Personal Finance Tracker for Android<br>Effective date: April 29, 2026</p>
+        <p class="subtitle">Moneytrax &mdash; Personal Finance Tracker for Android<br>Effective date: May 14, 2026</p>
 
         <div class="card">
             <strong>Summary:</strong> Moneytrax stores all your financial data locally on your device, including transaction records, optional receipt photos, and location coordinates. We do not collect, transmit, or sell your personal information. The only network connections are for exchange-rate updates, Google ads (with your consent), in-app purchases, and optional cloud backup to your own Google Drive. Photos and location data are stored on-device only and are included in your Drive backup if you choose to use it. Your data only leaves the device when you explicitly choose to back up or export it.
@@ -158,7 +158,7 @@
             <li>Display and calculate your financial records</li>
             <li>Generate statistics and charts</li>
             <li>Schedule local reminder notifications</li>
-            <li>Convert currencies using publicly available ECB exchange rates</li>
+            <li>Convert currencies using daily exchange rates fetched from ExchangeRate-API via Firebase</li>
         </ul>
         <p>We do not use your data for profiling, marketing, or any purpose other than operating the app on your device.</p>
 
@@ -209,9 +209,9 @@
                     <td>Handled by Google Play; no data shared with us</td>
                 </tr>
                 <tr>
-                    <td><strong>Frankfurter API (ECB)</strong></td>
+                    <td><strong>ExchangeRate-API / Firebase</strong></td>
                     <td>Daily exchange rates</td>
-                    <td>Currency codes only; no personal data. Your device's IP address is visible to the Frankfurter server as part of the standard HTTP request. <a href="https://www.frankfurter.app/">frankfurter.app</a></td>
+                    <td>Currency codes only; no personal data. Exchange rates are fetched once daily by our GitHub Actions pipeline from ExchangeRate-API and stored in Google Firebase Realtime Database. The app reads rates directly from Firebase via a standard HTTPS request. Your device's IP address is visible to Firebase's servers as part of that request, per <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>. No personal data is transmitted.</td>
                 </tr>
             </tbody>
         </table>
